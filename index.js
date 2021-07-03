@@ -47,6 +47,7 @@ function AddLister(){
             // You can use switch case to do the same.
             eval(this.innerHTML)();
             this.style.color = "red";
+            putAnimation(this.innerHTML);
         });
         //drum_b[i].drum = drum_b[i].innerText;
         // Named function did not work here ??
@@ -61,17 +62,23 @@ function playAudio(drum_t){
     console.log(drum_t.key);
 }
 
+// Adding keyboard listeners.
 document.addEventListener('keydown', function(event){
     var nodes = ['w', 'a', 's', 'd', 'j', 'k', 'l'];
     if ( nodes.includes(event.key)){
         eval(event.key)();
+        putAnimation(event.key);
     } else {
         console.log(event.key);
     }
-});
+}); 
 
 
-function handleClick(){
-    
-    alert("You clicked " + this.innerText)
+function putAnimation(key){
+    var active_k = document.querySelector("."+key);
+    active_k.classList.add("pressed");
+
+    setTimeout(function(){
+        active_k.classList.remove("pressed");
+    }, 100);
 }
